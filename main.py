@@ -25,7 +25,7 @@ best_prec1 = 0
 best_prec1_test = 0
 #os.environ['CUDA_VISIBLE_DEVICES'] = '4,5,6,7'
 
-#os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
 def main():
     global args, best_prec1, best_prec1_test
@@ -150,8 +150,8 @@ def main():
         data_length = 5
 
     train_loader = torch.utils.data.DataLoader(
-        TSNDataSet(args.root_path, args.train_list, num_segments=args.num_segments,
-                   new_length=data_length,
+        TSNDataSet(args.dataset,args.root_path, args.train_list, num_segments=args.num_segments,
+                   #new_length=data_length,
                    modality=args.modality,
                    image_tmpl=prefix,
                    transform=torchvision.transforms.Compose([
@@ -174,7 +174,7 @@ def main():
     val_batch_size = max(1, val_batch_size)
     
     val_loader = torch.utils.data.DataLoader(
-        TSNDataSet(args.root_path, args.val_list, num_segments=args.num_segments,
+        TSNDataSet(args.dataset,args.root_path, args.val_list, num_segments=args.num_segments,
                    new_length=data_length,
                    modality=args.modality,
                    image_tmpl=prefix,
@@ -261,6 +261,7 @@ def train(train_loader, model, criterion, optimizer, epoch, log, tf_writer):
         target_var = torch.autograd.Variable(target)
 
         # compute output
+        print(input_var.shape)
         output = model(input_var)
         loss = criterion(output, target_var)
 
