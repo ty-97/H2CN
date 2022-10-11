@@ -10,7 +10,7 @@ sys.path.append('..')
 
 class VideoNet(nn.Module):
     def __init__(self, num_class, num_segments, modality,
-                backbone='resnet50', net=None, consensus_type='avg',
+                backbone='resnet50', net=None, consensus_type='avg', new_length=None,
                 dropout=0.5, partial_bn=True, print_spec=True, pretrain='imagenet', ef_lr5=False,
                 fc_lr5=False, non_local=False, element_filter=False, stage='S3B', cdiv=2, loop=False, target_transforms=None):
         super(VideoNet, self).__init__()
@@ -40,12 +40,17 @@ class VideoNet(nn.Module):
         if partial_bn:
             self.partialBN(True)
 
+        if new_length is None:
+            self.new_length = 1 if modality == "RGB" else 5
+        else:
+            self.new_length = new_length
+
     def _prepare_base_model(self, backbone):
         # assert self.non_local or self.element_filter
         
         if 'resnet' in backbone or 'resnext' in backbone or 'convnext' in backbone:
             if self.net == 'H2CN':
-                self.base_model = h2cn(num_segments)
+                self.base_model = h2cn(self.num_segments)
                     
             else:
                 print('=> base model: TSN, with backbone: {}'.format(backbone))
@@ -183,8 +188,6 @@ class VideoNet(nn.Module):
                         bn.extend(list(m.parameters()))
                 elif isinstance(m, torch.nn.BatchNorm3d) or isinstance(m, torch.nn.BatchNorm1d):
                     bn.extend(list(m.parameters()))
-                elif isinstance(m, LN) or isinstance(m, torch.nn.modules.normalization.LayerNorm):
-                    bn.extend(list(m.parameters()))
 
                 elif len(m._modules) == 0:
                     if len(list(m.parameters())) > 0:
@@ -223,12 +226,15 @@ class VideoNet(nn.Module):
 
     def forward(self, input):
         # input size [batch_size, num_segments, 3, h, w]
-        input = input.view((-1, 3) + input.size()[-2:])
-        base_out = self.base_model(input)
+        sample_len = (3 if self.modality == "RGB" else 2) * self.new_length
+        base_out = self.base_model(input.view((-1, sample_len*5) + input.size()[-2:]))
+        #input = input.view((-1, 3) + input.size()[-2:])
+        #base_out = self.base_model(input)
         if self.dropout > 0:
             base_out = self.new_fc(base_out)
         #
-        base_out = base_out.view((-1,self.num_segments)+base_out.size()[1:])
+        base_out = base_out.view((-1, self.num_segments) + base_out.size()[1:])
+        output = self.consensus(base_out)
         #
         output = self.consensus(base_out)
         # output = base_out.mean(dim=1)
