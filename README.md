@@ -1,7 +1,7 @@
 # Hierarchical Hourglass Convolutional Network for Efficient Video Classification (MM 2022)
 This is an official implementaion of paper "Hierarchical Hourglass Convolutional Network for Efficient Video Classification", which has been accepted by MM 2022. [`Paper link`](http://staff.ustc.edu.cn/~hexn/papers/mm22-hourglass-cnn-video.pdf)
 <div align="center">
-  <img src="demo/model.jpg" width="700px"/>
+  <img src="model.png" width="700px"/>
 </div>
 
 
