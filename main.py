@@ -261,7 +261,7 @@ def train(train_loader, model, criterion, optimizer, epoch, log, tf_writer):
         target_var = torch.autograd.Variable(target)
 
         # compute output
-        print(input_var.shape)
+
         output = model(input_var)
         loss = criterion(output, target_var)
 
