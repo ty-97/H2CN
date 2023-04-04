@@ -60,33 +60,33 @@ use the 224×224 resolution for performance report.
 
 | Model             | Frame * view   | Top-1 Acc. | Top-5 Acc. | Checkpoint |
 | ----------------- | ----------- | ---------- | ----------- | ---------------- |
-| H2CN   | 8 * 1  | 53.6%      | 81.4%     | [link]() |
-| H2CN   | 16 * 1  | 55.0%      | 82.4%     | [link]() |
-| H2CN   | (8+16) * 1  | 56.7%      | 83.2%     | [link]() |
+| H2CN   | 8 * 1  | 53.6%      | 81.4%     |  |
+| H2CN   | 16 * 1  | 55.0%      | 82.4%     |  |
+| H2CN   | (8+16) * 1  | 56.7%      | 83.2%     |  |
 
 
 #### Something-Something-V2
 | Model             | Frame * view   | Top-1 Acc. | Top-5 Acc. | Checkpoint |
 | ----------------- | ----------- | ---------- | ----------- | ---------------- |
-| H2CN   | 8 * 1  | 65.2%      | 89.7%     | [link]() |
-| H2CN   | 16 * 1  | 66.4%      | 90.1%     | [link]() |
-| H2CN   | (8+16) * 1  | 67.9%      | 91.2%     | [link]() |
+| H2CN   | 8 * 1  | 65.2%      | 89.7%     | |
+| H2CN   | 16 * 1  | 66.4%      | 90.1%     | |
+| H2CN   | (8+16) * 1  | 67.9%      | 91.2%     |  |
 
 
 ### Kinetics-400
 
 | Model             | Frame * view   | Top-1 Acc. | Top-5 Acc. | Checkpoint |
 | ----------------- | ----------- | ---------- | ----------- | ---------------- |
-| H2CN   | 8 * 30  | 76.9%      | 93.0%     | [link]() |
-| H2CN   | 16 * 30  | 66.4%      | 93.3%     | [link]() |
-| H2CN   | (8+16) * 30  | 67.9%      | 93.6%     | [link]() |
+| H2CN   | 8 * 30  | 76.9%      | 93.0%     | [link](https://pan.baidu.com/s/16nf9kad6RClaW3NbInsPBA)(password:defq) |
+| H2CN   | 16 * 30  | 77.9%      | 93.3%     | [link](https://pan.baidu.com/s/1SsBSWqJYpM4bnh1ACNqtzg)(password:vert) |
+| H2CN   | (8+16) * 30  | 78.7%      | 93.6%     |  |
 
 
 
 ### Diving48
 | Model             | Frame * view   | Top-1 Acc.  | Checkpoint |
 | ----------------- | ----------- | ----------  | ---------------- |
-| H2CN   | 16 * 1  | 87.0%      | [link]() |
+| H2CN   | 16 * 1  | 87.0%      |  |
 
 
 
