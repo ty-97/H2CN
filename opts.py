@@ -53,7 +53,6 @@ parser.add_argument('--print-freq', '-p', default=20, type=int,
 parser.add_argument('--eval-freq', '-ef', default=5, type=int,
                     metavar='N', help='evaluation frequency (default: 5)')
 
-
 # ========================= Runtime Configs ==========================
 parser.add_argument('-j', '--workers', default=8, type=int, metavar='N',
                     help='number of data loading workers (default: 8)')
